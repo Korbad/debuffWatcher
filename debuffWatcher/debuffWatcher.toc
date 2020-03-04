@@ -1,0 +1,9 @@
+## Interface: 11302
+## Title: debuffWatcher
+## Version: 1
+## Author: Korbad
+## Notes: debuffWatcher
+## SavedVariablesPerCharacter: isFrameOn, isChatOn
+## DefaultState: Enabled
+
+debuffWatcher.lua
