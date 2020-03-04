@@ -41,18 +41,15 @@ local approvedDebuffs = {"Expose Weakness"
 ,"Growl"
 ,"Challenging Shout"
 ,"Corruption"
-,"Curse of Agony"
-,"Moonfire"};
+,"Curse of Agony"};
 local debuffNamesArray = {}
 local mobNames = {"Razorgore the Untamed","Vaelastrasz the Corrupt","Broodlord Lashlayer","Firemaw","Ebonroc","Flamegor","Chromaggus","Nefarian"
 ,"Lucifron","Magmadar","Gehennas","Garr","Shazzrah","Baron Geddon","Golemagg the Incinerator","Sulfuron Harbinger","Majordomo Executus","Ragnaros"
-,"Greater Plainstrider"
 }
 local missingToggle = false;
 
-local mobSpecificUnapprovedDebuffs = { ["Broodlord Lashlayer"] = {"Curse of Recklessness"}, ["Greater Plainstrider"] = {"Moonfire"} }
-local mobSpecificApprovedDebuffs = { ["Chromaggus"] = {"Detect Magic"},
-["Greater Plainstrider"] = {"Entangling Roots"} }
+local mobSpecificUnapprovedDebuffs = { ["Broodlord Lashlayer"] = {"Curse of Recklessness"} }
+local mobSpecificApprovedDebuffs = { ["Chromaggus"] = {"Detect Magic"} }
 
 
 function createDebuffFrame()
