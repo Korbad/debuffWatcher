@@ -41,7 +41,8 @@ local approvedDebuffs = {"Expose Weakness"
 ,"Growl"
 ,"Challenging Shout"
 ,"Corruption"
-,"Curse of Agony"};
+,"Curse of Agony"
+,"Drain Soul"};
 local debuffNamesArray = {}
 local mobNames = {"Razorgore the Untamed","Vaelastrasz the Corrupt","Broodlord Lashlayer","Firemaw","Ebonroc","Flamegor","Chromaggus","Nefarian"
 ,"Lucifron","Magmadar","Gehennas","Garr","Shazzrah","Baron Geddon","Golemagg the Incinerator","Sulfuron Harbinger","Majordomo Executus","Ragnaros"
