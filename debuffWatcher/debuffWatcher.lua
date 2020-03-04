@@ -17,8 +17,7 @@ local debuffArray = {};
 local enabled = true;
 local alreadyWarned = {};
 local alreadyWarnedMissing = {};
-local approvedDebuffs = {
-,"Expose Weakness"
+local approvedDebuffs = {"Expose Weakness"
 ,"Faerie Fire (Feral)"
 ,"Faerie Fire"
 ,"Gift of Arthas"
@@ -27,38 +26,33 @@ local approvedDebuffs = {
 ,"Curse of Recklessness"
 ,"Curse of the Elements"
 ,"Curse of Shadow"
-
-
 ,"Winter's Chill"
 ,"Shadow Word: Pain"
 ,"Mind Flay"
 ,"Shadow Weaving"
-
 ,"Screech"
 ,"Demoralizing Shout"
-
 ,"Thunderfury"
 ,"Shadow Vulnerability"
 ,"Spell Vulnerability"
 ,"Shadowburn"
-
 ,"Deep Wound"
 ,"Taunt"
 ,"Growl"
 ,"Challenging Shout"
-
 ,"Corruption"
 ,"Curse of Agony"
-};
+,"Moonfire"};
 local debuffNamesArray = {}
 local mobNames = {"Razorgore the Untamed","Vaelastrasz the Corrupt","Broodlord Lashlayer","Firemaw","Ebonroc","Flamegor","Chromaggus","Nefarian"
 ,"Lucifron","Magmadar","Gehennas","Garr","Shazzrah","Baron Geddon","Golemagg the Incinerator","Sulfuron Harbinger","Majordomo Executus","Ragnaros"
+,"Greater Plainstrider"
 }
 local missingToggle = false;
 
-
-local mobSpecificUnapprovedDebuffs = { ["Broodlord Lashlayer"] = {"Curse of Recklessness"} }
-local mobSpecificApprovedDebuffs = { ["Chromaggus"] = {"Detect Magic"} }
+local mobSpecificUnapprovedDebuffs = { ["Broodlord Lashlayer"] = {"Curse of Recklessness"}, ["Greater Plainstrider"] = {"Moonfire"} }
+local mobSpecificApprovedDebuffs = { ["Chromaggus"] = {"Detect Magic"},
+["Greater Plainstrider"] = {"Entangling Roots"} }
 
 
 function createDebuffFrame()
@@ -96,6 +90,14 @@ local function has_value (tab, val)
     return false
 end
 
+function tableFindIindex(tab,el)
+    for index, value in pairs(tab) do
+        if value == el then
+            return index
+        end
+    end
+end
+
 function updateDebuffFrameColor(num, debuffName, charName)
 	if debuffName == "-" then
 		debuffArray[num]:SetTextColor(0,0,0);
@@ -120,17 +122,22 @@ function updateDebuffFrameColor(num, debuffName, charName)
 	if not has_value(mobNames,mobName) then
 		return
 	end
-	if
-	if has_value(mobSpecificUnapprovedDebuffs,mobName) then
-		unapprovedTable = mobSpecificUnapprovedDebuffs[mobName]
-		for key,value in pairs(unapprovedTable) do
-			approvedDebuffsTemp[key] = nil
+	
+	for mob_, approved_ in pairs(mobSpecificApprovedDebuffs) do
+		if mob_ == mobName then
+			for key, debuffName_ in pairs(approved_) do
+				approvedDebuffsTemp[#approvedDebuffsTemp+1] = debuffName_
+			end
 		end
 	end
-	if has_value(mobSpecificApprovedDebuffs,mobName) then
-		approvedTable = mobSpecificApprovedDebuffs[mobName]
-		for key,value in pairs(approvedTable) do
-			table.insert(approvedDebuffsTemp,value)
+	for mob_, unapproved_ in pairs(mobSpecificUnapprovedDebuffs) do
+		if mob_ == mobName then
+			for key, debuffName_ in pairs(unapproved_) do
+				--print("removing unapproved debuffName: "..debuffName_)
+				--approvedDebuffsTemp[debuffName_] = nil
+				index = tableFindIindex(approvedDebuffsTemp,debuffName_)
+				table.remove(approvedDebuffsTemp, index)
+			end
 		end
 	end
 	
